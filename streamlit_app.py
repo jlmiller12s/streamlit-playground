@@ -1,3 +1,6 @@
+headers = {"Authorization": f"Bearer {st.secrets['WF_TOKEN']}"}
+r = requests.get("https://yourdomain.my.workfront.com/attask/api/v16.0/task/search", headers=headers)
+
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -27,4 +30,17 @@ if st.button("Fetch Tasks"):
     r = requests.get("https://jsonplaceholder.typicode.com/todos")
     data = r.json()[:10]  # limit for demo
     st.write("✅ Success! Showing sample data:")
+    st.dataframe(data)
+
+import streamlit as st
+import requests
+
+st.title("Workfront-style API Test")
+
+url = "https://jsonplaceholder.typicode.com/users"
+params = {"fields": "name,email,username"}  # just to simulate query params
+
+if st.button("Fetch Workfront Users"):
+    response = requests.get(url, params=params)
+    data = response.json()
     st.dataframe(data)
