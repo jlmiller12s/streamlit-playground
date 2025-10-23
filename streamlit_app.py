@@ -17,3 +17,14 @@ if rolling_average:
 tab1, tab2 = st.tabs(["Chart", "Dataframe"])
 tab1.line_chart(data, height=250)
 tab2.dataframe(data, height=250, use_container_width=True)
+
+import streamlit as st
+import requests
+
+st.title("API Test – Streamlit Sandbox")
+
+if st.button("Fetch Tasks"):
+    r = requests.get("https://jsonplaceholder.typicode.com/todos")
+    data = r.json()[:10]  # limit for demo
+    st.write("✅ Success! Showing sample data:")
+    st.dataframe(data)
